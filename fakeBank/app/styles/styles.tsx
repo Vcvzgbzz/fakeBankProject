@@ -56,5 +56,19 @@ export const productStyles: { [key: string]: CSSProperties } = {
         height: '2px',
         backgroundColor: '#000',
         border: 'none',
+      },
+      tableHeaderStyle: {
+        background: '#f2f2f2',
+        padding: '8px',
+        textAlign: 'left',
+        borderBottom: '1px solid #ddd',
+      },
+      
+      tableCellStyle:{
+        padding: '8px',
+        borderBottom: '1px solid #ddd',
+      },
+      alternateRowStyle:{
+        background: '#cce5ff', // Light blue background for alternate rows
       }
   }

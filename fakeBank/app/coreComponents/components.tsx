@@ -55,5 +55,22 @@ type VStackProps = {
     return <span style={textStyle}>{children}</span>;
   };
 
+  type VerticalLineProps = {
+    color?: string;
+    height: string;
+    width?: string;
+  };
+  
+  export const VerticalLine: React.FC<VerticalLineProps> = ({ color = 'black', height, width = '1px' }) => {
+    const lineStyle: React.CSSProperties = {
+      borderLeft: `${width} solid ${color}`,
+      height,
+      margin: '0',
+    };
+  
+    return <div style={lineStyle}></div>;
+  };
+
+  
 
 

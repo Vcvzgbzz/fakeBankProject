@@ -1,5 +1,5 @@
 import React from 'react'
-import { FakeUserResponse } from '../definitions/apiDefinitions' // Adjust the path based on your project structure
+import { FakeUserResponse } from '../definitions/apiDefinitions'
 
 type UserCardProps = {
   user: FakeUserResponse['results'][0]

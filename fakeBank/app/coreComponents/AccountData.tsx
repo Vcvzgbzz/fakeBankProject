@@ -7,7 +7,7 @@ export type AccountDataProps = {
 }
 
 function formatDate(date: Date): string {
-  return date.toLocaleDateString() // You can customize the date format as needed
+  return date.toLocaleDateString()
 }
 
 function AccountData({ data }: AccountDataProps) {

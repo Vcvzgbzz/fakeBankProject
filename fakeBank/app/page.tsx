@@ -60,7 +60,10 @@ export default function Page() {
     const balance = Math.random() * 10000
     const accountType = inputAccountType === 'Savings' ? 'Savings' : 'Checking'
     const lastPurchases: Purchase[] = Array.from({ length: 10 }, () => ({
-      amount: Math.random() * 500,
+      amount:
+        inputAccountType === 'Savings' 
+          ? Math.floor(Math.random() * 500)
+          : Math.random() * 500,
       description:
         accountType === 'Checking'
           ? `Purchase #${generateRandomString(5)}`
@@ -80,8 +83,8 @@ export default function Page() {
   const randomBankDataSavings: BankData = bankData('Savings')
   try {
     return !fakeUser ? (
-      <div style={pageStyles.pageContainer}>
-        Loading Your Bank Account Information...
+      <div style={{...pageStyles.pageContainer,width:'100%',height:'250px',textAlign:'center'}}>
+        <Text style={{paddingTop:'50px'}} size={30}>Loading Your Bank Account Information...</Text>
       </div>
     ) : (
       <div style={pageStyles.pageContainer}>

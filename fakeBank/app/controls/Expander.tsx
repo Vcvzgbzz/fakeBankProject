@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 interface ExpanderProps {
-  title: string;
-  children: React.ReactNode;
+  title: string
+  children: React.ReactNode
 }
 
 const Expander: React.FC<ExpanderProps> = ({ title, children }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpander = () => {
-    setIsExpanded(!isExpanded);
-  };
+    setIsExpanded(!isExpanded)
+  }
 
   return (
-    <div style={{ border: '1px solid #ccc', marginBottom: '10px', width:'100%' }} className='Expander'>
+    <div
+      style={{ border: '1px solid #ccc', marginBottom: '10px', width: '100%' }}
+      className="Expander"
+    >
       <div
         style={{
           display: 'flex',
@@ -29,16 +31,12 @@ const Expander: React.FC<ExpanderProps> = ({ title, children }) => {
         }}
         onClick={toggleExpander}
       >
-        <strong>{title}{' '}</strong>
+        <strong>{title} </strong>
         <FontAwesomeIcon icon={isExpanded ? faChevronUp : faChevronDown} />
       </div>
-      {isExpanded && (
-        <div style={{ padding: '10px' }}>
-          {children}
-        </div>
-      )}
+      {isExpanded && <div style={{ padding: '10px' }}>{children}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default Expander;
+export default Expander

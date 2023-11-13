@@ -1,9 +1,9 @@
-import React from 'react';
-import { FakeUserResponse } from '../definitions/apiDefinitions'; // Adjust the path based on your project structure
+import React from 'react'
+import { FakeUserResponse } from '../definitions/apiDefinitions' // Adjust the path based on your project structure
 
 type UserCardProps = {
-  user: FakeUserResponse['results'][0];
-};
+  user: FakeUserResponse['results'][0]
+}
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
   return (
@@ -17,8 +17,8 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         <p>Phone: {user.phone}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const cardStyle: React.CSSProperties = {
   display: 'flex',
@@ -27,11 +27,11 @@ const cardStyle: React.CSSProperties = {
   border: '1px solid #ddd',
   borderRadius: '8px',
   margin: '10px',
-};
+}
 
 const imageStyle: React.CSSProperties = {
   marginRight: '20px',
   borderRadius: '50%',
-};
+}
 
-export default UserCard;
+export default UserCard

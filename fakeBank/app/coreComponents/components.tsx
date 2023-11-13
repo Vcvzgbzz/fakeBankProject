@@ -16,7 +16,7 @@ type HStackProps = {
       ...style,
     };
   
-    return <div style={stackStyle}>{children}</div>;
+    return <div style={stackStyle} className='HStack'>{children}</div>;
   };
 
 
@@ -29,6 +29,7 @@ type VStackProps = {
   
   export const VStack: React.FC<VStackProps> = ({ children, spacing = 8, align = 'flex-start', style }) => {
     const stackStyle: React.CSSProperties = {
+     width:'100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: align,
@@ -36,7 +37,7 @@ type VStackProps = {
       ...style,
     };
   
-    return <div style={stackStyle}>{children}</div>;
+    return <div style={stackStyle} className='VStack'>{children}</div>;
   };
   
 
@@ -52,7 +53,7 @@ type VStackProps = {
       ...style,
     };
   
-    return <span style={textStyle}>{children}</span>;
+    return <span style={textStyle} className='Text'>{children}</span>;
   };
 
   type VerticalLineProps = {

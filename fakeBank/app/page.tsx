@@ -10,6 +10,10 @@ import {HStack,VStack,Text,VerticalLine} from './coreComponents/components'
 import {BankData,Purchase} from './definitions/coreTypings'
 import AccountData from './coreComponents/AccountData'
 import UserData from './coreComponents/UserData'
+import Expander from "./controls/Expander";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp,faUniversity } from '@fortawesome/free-solid-svg-icons';
+
 
 
 export default function Page() {
@@ -26,22 +30,6 @@ export default function Page() {
 
   const [fakeUser,setFakeUser]=useState<FakeUserResponse['results'][0]|undefined>(undefined)
 
-
-  const parseBirthday =(birthday:string) =>{
-    return birthday.split("T")[0].replace(/-/g, ' ')
-    
-  }
-  const formatToAmericanStandard= (phoneNumber: string) => {
-    const cleanedNumber = phoneNumber.replace(/\D/g, '')
-  
-    if (cleanedNumber.length === 10) {
-      return `(${cleanedNumber.substring(0, 3)}) ${cleanedNumber.substring(3, 6)}-${cleanedNumber.substring(6)}`;
-    } else if (cleanedNumber.length === 11 && cleanedNumber[0] === '1') {
-      return `1-${cleanedNumber.substring(1, 4)}-${cleanedNumber.substring(4, 7)}-${cleanedNumber.substring(7)}`;
-    }
-  
-    return phoneNumber
-  }
   const generateRandomString=(length: number): string =>{
     const characters = '0123456789'
     let result = ''
@@ -51,10 +39,10 @@ export default function Page() {
     return result;
   }
   const generateRandomDate=(): Date =>{
-    const start = new Date(2022, 0, 1); // January 1, 2022
-    const end = new Date(); // Current date
-    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    return randomDate;
+    const start = new Date(2022, 0, 1)
+    const end = new Date()
+    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+    return randomDate
   }
   const bankData=(inputAccountType?:'Savings'|'Checking'): BankData => {
     const accountNumber = generateRandomString(12)
@@ -83,27 +71,30 @@ try{
       Loading Your Bank Account Information...
     </div>):
     (<div style={pageStyles.pageContainer}>
-      <Text size={40}>Fake Bank Incorperated</Text>
+      <HStack align="center" style={{justifyContent:'space-between'}}>
+      <Text size={40}>Fake Bank Incorporated</Text>
+      <FontAwesomeIcon icon={faUniversity} size="3x" />
+      </HStack>
+     
       <hr style={pageStyles.lineStyle}></hr>
       <HStack style={{justifyContent:'space-between'}} align="center">
-        <Text size={30}>Welcome {fakeUser.name.first} !</Text>
-        
-          <VStack align="flex-end">
-            
           <UserData user={fakeUser}></UserData>
-          </VStack>
       </HStack>
       <hr style={pageStyles.lineStyle}></hr>
       
       <VStack>
-      
-      <HStack style={{justifyContent:'space-between'}}>
-            <AccountData data={randomBankDataChecking}/>
-            <AccountData data={randomBankDataSavings}/>
-          </HStack>
-          
-
+        <Expander children={ <AccountData data={randomBankDataChecking}/>} title="View Your Checking Account Data"/>
+        <hr style={pageStyles.lineStyle}></hr>
+        <Expander children={ <AccountData data={randomBankDataSavings}/>} title="View Your Savings Account Data"/>
       </VStack>
+      <br/>
+      <br/>
+      <hr style={pageStyles.lineStyle}></hr>
+      <footer>
+        <p>&copy; 2023 Fake Bank Incorporated. All rights reserved.</p>
+        <p>123 Main Street, Cityville, Country</p>
+        <p>Email: info@fakebank.com | Phone: (123) 456-7890</p>
+       </footer>
     </div>)
   );
 }catch{

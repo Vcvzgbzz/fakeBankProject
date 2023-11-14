@@ -1,4 +1,6 @@
 {
+  "name": "bank_project",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev -p 3039",
     "build": "next build",

@@ -20,6 +20,7 @@ import {
   faChevronDown,
   faChevronUp,
   faUniversity,
+  faReceipt,
 } from '@fortawesome/free-solid-svg-icons'
 
 export default function Page() {
@@ -61,7 +62,7 @@ export default function Page() {
     const accountType = inputAccountType === 'Savings' ? 'Savings' : 'Checking'
     const lastPurchases: Purchase[] = Array.from({ length: 10 }, () => ({
       amount:
-        inputAccountType === 'Savings' 
+        inputAccountType === 'Savings'
           ? Math.floor(Math.random() * 500)
           : Math.random() * 500,
       description:
@@ -83,19 +84,44 @@ export default function Page() {
   const randomBankDataSavings: BankData = bankData('Savings')
   try {
     return !fakeUser ? (
-      <div style={{...pageStyles.pageContainer,width:'100%',height:'250px',textAlign:'center'}}>
-        <Text style={{paddingTop:'50px'}} size={30}>Loading Your Bank Account Information...</Text>
+      <div
+        style={{
+          ...pageStyles.pageContainer,
+          width: '100%',
+          height: '250px',
+          textAlign: 'center',
+        }}
+      >
+        <Text style={{ paddingTop: '50px' }} size={30}>
+          Loading Your Bank Account Information...
+        </Text>
       </div>
     ) : (
       <div style={pageStyles.pageContainer}>
         <HStack align="center" style={{ justifyContent: 'space-between' }}>
           <Text size={40}>Fake Bank Incorporated</Text>
+          <HStack spacing={10}>
+            <Button
+              icon={faReceipt}
+              text={'Report an issue'}
+              title="Have an issue with your statement? Report an issue here"
+            />
+            <Button icon={faChevronDown} text={'Another Page'} />
+            <Button icon={faChevronUp} text={'Another Page'} />
+          </HStack>
           <FontAwesomeIcon icon={faUniversity} size="3x" />
         </HStack>
 
         <hr style={pageStyles.lineStyle}></hr>
         <HStack style={{ justifyContent: 'space-between' }} align="center">
           <UserData user={fakeUser}></UserData>
+          <div
+            style={{ ...pageStyles.cardStyle, width: '100%', height: '100%' }}
+          >
+            {' '}
+            Thinking of adding more pages with the example buttons above, or
+            adding a new section here.
+          </div>
         </HStack>
         <hr style={pageStyles.lineStyle}></hr>
 

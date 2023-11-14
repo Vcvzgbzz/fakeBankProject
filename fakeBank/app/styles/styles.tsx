@@ -69,6 +69,29 @@ export const pageStyles: { [key: string]: CSSProperties } = {
     borderBottom: '1px solid #ddd',
   },
   alternateRowStyle: {
-    background: '#cce5ff', // Light blue background for alternate rows
+    background: '#cce5ff',
+  },
+  cardStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    margin: '10px',
+  },
+}
+
+export const controlStyles: { [key: string]: CSSProperties } = {
+  button: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+  },
+  hoverButton: {
+    backgroundColor: '#45a049',
   },
 }

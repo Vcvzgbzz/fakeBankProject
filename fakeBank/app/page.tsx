@@ -4,8 +4,7 @@ import HomePage from './pages/HomePage'
 import Reporting from './pages/Reporting'
 
 const Page: React.FC = () => {
-  return <HomePage /> 
-  
+  return <HomePage />
 }
 
 export default Page

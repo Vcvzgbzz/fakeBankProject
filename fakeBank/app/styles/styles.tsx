@@ -1,7 +1,9 @@
 import React, { CSSProperties } from 'react'
+import { colors } from './colors'
+
 export const productStyles: { [key: string]: CSSProperties } = {
   productContainer: {
-    border: '2px solid #ccc',
+    border: `2px solid ${colors.mediumGrey}`,
     borderRadius: '10px',
     padding: '10px',
     margin: '10px',
@@ -9,7 +11,7 @@ export const productStyles: { [key: string]: CSSProperties } = {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
     minWidth: '200px',
   },
 
@@ -46,7 +48,7 @@ export const productStyles: { [key: string]: CSSProperties } = {
 export const pageStyles: { [key: string]: CSSProperties } = {
   pageContainer: {
     fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: colors.lightGrey,
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
@@ -58,15 +60,15 @@ export const pageStyles: { [key: string]: CSSProperties } = {
     border: 'none',
   },
   tableHeaderStyle: {
-    background: '#f2f2f2',
+    background: colors.lightGrey,
     padding: '8px',
     textAlign: 'left',
-    borderBottom: '1px solid #ddd',
+    borderBottom: `1px solid ${colors.mediumGrey}`,
   },
 
   tableCellStyle: {
     padding: '8px',
-    borderBottom: '1px solid #ddd',
+    borderBottom: `1px solid ${colors.mediumGrey}`,
   },
   alternateRowStyle: {
     background: '#cce5ff',
@@ -75,7 +77,7 @@ export const pageStyles: { [key: string]: CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     padding: '20px',
-    border: '1px solid #ddd',
+    border: `1px solid ${colors.mediumGrey}`,
     borderRadius: '8px',
     margin: '10px',
   },
@@ -83,8 +85,8 @@ export const pageStyles: { [key: string]: CSSProperties } = {
 
 export const controlStyles: { [key: string]: CSSProperties } = {
   button: {
-    backgroundColor: '#4CAF50',
-    color: 'white',
+    backgroundColor: colors.darkGrey,
+    color: colors.white,
     padding: '10px 15px',
     border: 'none',
     borderRadius: '5px',
@@ -92,6 +94,6 @@ export const controlStyles: { [key: string]: CSSProperties } = {
     transition: 'background-color 0.3s ease',
   },
   hoverButton: {
-    backgroundColor: '#45a049',
+    backgroundColor: colors.mediumGrey,
   },
 }

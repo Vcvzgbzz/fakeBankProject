@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 interface CallApiProps<RequestType, ResponseType> {
   onSuccess?: (data: ResponseType) => void
   onFail?: (error: any) => void
+  onRequest?: () => void
   url: string
   requestPayload?: RequestType
   method?: 'get' | 'post'
@@ -11,10 +12,14 @@ interface CallApiProps<RequestType, ResponseType> {
 export function callApi<RequestType, ResponseType>({
   onSuccess,
   onFail,
+  onRequest,
   url,
   requestPayload,
   method,
 }: CallApiProps<RequestType, ResponseType>) {
+  if (onRequest) {
+    onRequest()
+  }
   fetch(url, {
     method: method ? method : 'POST',
     headers: {

@@ -27,13 +27,18 @@ import {
   faReceipt,
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
+import CreditReport from '../coreComponents/CreditReport'
 
 export default function HomePage() {
   useEffect(() => {
     callApi<undefined, FakeUserResponse>({
       url: 'https://randomuser.me/api',
       method: 'get',
+      onRequest: () => {
+        console.log('requesting data')
+      },
       onSuccess: (data) => {
+        console.log('data back ')
         setFakeUser(data.results[0])
       },
       onFail: (error) => console.log(error),
@@ -121,13 +126,7 @@ export default function HomePage() {
         <hr style={pageStyles.lineStyle}></hr>
         <HStack style={{ justifyContent: 'space-between' }} align="center">
           <UserData user={fakeUser}></UserData>
-          <div
-            style={{ ...pageStyles.cardStyle, width: '100%', height: '100%' }}
-          >
-            {' '}
-            Thinking of adding more pages with the example buttons above, or
-            adding a new section here.
-          </div>
+          <CreditReport></CreditReport>
         </HStack>
         <hr style={pageStyles.lineStyle}></hr>
 

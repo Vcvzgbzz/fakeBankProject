@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 interface CallApiProps<RequestType, ResponseType> {
   onSuccess?: (data: ResponseType) => void
   onFail?: (error: any) => void
@@ -31,4 +33,13 @@ export function callApi<RequestType, ResponseType>({
         onFail(error)
       }
     })
+}
+
+interface routeToPageProps {
+  route: string
+  router: any
+}
+
+export function routeToPage({ route, router }: routeToPageProps) {
+  router.push(route)
 }

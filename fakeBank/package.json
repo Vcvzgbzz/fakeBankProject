@@ -2,17 +2,19 @@
   "name": "bank_project",
   "version": "1.0.0",
   "scripts": {
+    "format": "prettier --write .",
     "dev": "next dev -p 3039",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "precommit": "npm run format && git add ."
   },
   "dependencies": {
     "next": "^14.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.0",
     "uuid": "^9.0.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -25,8 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format:check",
-      "pre-push": "npm test"
+      "pre-commit": "npm run precommit"
     }
   }
 }

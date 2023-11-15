@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FakeUserResponse } from '../definitions/apiDefinitions'
 import { pageStyles } from '../styles/styles'
 import { HStack, Text, VStack } from './components'
+import { colors } from '../styles/colors'
 
 interface CreditReportProps {
   user: FakeUserResponse['results'][0]
 }
 
-export default function CreditReport() {
+export default function CreditReport({ user }: CreditReportProps) {
   const generateInterestingFacts = (creditScore: number): string[] => {
     const facts: string[] = []
 
@@ -22,6 +23,12 @@ export default function CreditReport() {
       facts.push('Some room for improvement in credit management.')
     } else {
       facts.push('Consider taking steps to improve credit health.')
+    }
+    if (user.dob.age < 35) {
+      facts.push('One auto loan found')
+    }
+    if (user.dob.age > 40) {
+      facts.push('One Authorized User on one credit account found')
     }
     return facts
   }
@@ -44,7 +51,19 @@ export default function CreditReport() {
             <HStack>
               <FontAwesomeIcon
                 icon={faInfoCircle}
-                style={{ marginRight: '5px' }}
+                style={{
+                  marginRight: '5px',
+                  color:
+                    index > 0
+                      ? colors.darkGrey
+                      : fact.includes('Excellent')
+                      ? colors.green
+                      : fact.includes('Good')
+                      ? colors.green
+                      : fact.includes('Some')
+                      ? colors.yellow
+                      : colors.red,
+                }}
               />
               <Text>{fact}</Text>
             </HStack>

@@ -44,7 +44,7 @@ function Button({
       onMouseLeave={handleMouseLeave}
       title={title}
     >
-      <HStack spacing={5}>
+      <HStack spacing={5} align="center">
         <Text size={13}>{text}</Text>
         {icon && <FontAwesomeIcon icon={icon} />}
       </HStack>

@@ -28,6 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import CreditReport from '../coreComponents/CreditReport'
+import { colors } from '../styles/colors'
 
 export default function HomePage() {
   useEffect(() => {
@@ -110,7 +111,15 @@ export default function HomePage() {
       <div style={pageStyles.pageContainer}>
         <HStack align="center" style={{ justifyContent: 'space-between' }}>
           <Text size={40}>Fake Bank Incorporated</Text>
-          <HStack spacing={10}>
+          <HStack
+            spacing={10}
+            style={{
+              paddingLeft: '10px',
+              borderLeft: `2px solid ${colors.black}`,
+              borderRight: `2px solid ${colors.black}`,
+              paddingRight: '10px',
+            }}
+          >
             <Button
               icon={faReceipt}
               text={'Report an issue'}
@@ -126,7 +135,7 @@ export default function HomePage() {
         <hr style={pageStyles.lineStyle}></hr>
         <HStack style={{ justifyContent: 'space-between' }} align="center">
           <UserData user={fakeUser}></UserData>
-          <CreditReport></CreditReport>
+          <CreditReport user={fakeUser}></CreditReport>
         </HStack>
         <hr style={pageStyles.lineStyle}></hr>
 
@@ -148,6 +157,7 @@ export default function HomePage() {
           <p>&copy; 2023 Fake Bank Incorporated. All rights reserved.</p>
           <p>123 Main Street, Cityville, Country</p>
           <p>Email: info@fakebank.com | Phone: (123) 456-7890</p>
+          <p>Jadeyn Fincher, Sam Pierce</p>
         </footer>
       </div>
     )

@@ -80,6 +80,7 @@ export const pageStyles: { [key: string]: CSSProperties } = {
     border: `1px solid ${colors.mediumGrey}`,
     borderRadius: '8px',
     margin: '10px',
+    width: '50%',
   },
 }
 

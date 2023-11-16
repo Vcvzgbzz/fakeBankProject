@@ -29,6 +29,7 @@ import {
 import { useRouter } from 'next/router'
 import CreditReport from '../coreComponents/CreditReport'
 import { colors } from '../styles/colors'
+import Link from 'next/link'
 
 export default function HomePage() {
   useEffect(() => {
@@ -125,7 +126,7 @@ export default function HomePage() {
               text={'Report an issue'}
               title="Have an issue with your statement? Report an issue here"
               onClick={() => {}}
-            />
+            ></Button>
             <Button icon={faChevronDown} text={'Another Page'} />
             <Button icon={faChevronUp} text={'Another Page'} />
           </HStack>

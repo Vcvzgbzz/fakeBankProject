@@ -56,7 +56,7 @@ export const pageStyles: { [key: string]: CSSProperties } = {
   lineStyle: {
     width: '100%',
     height: '2px',
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     border: 'none',
   },
   tableHeaderStyle: {
@@ -71,7 +71,7 @@ export const pageStyles: { [key: string]: CSSProperties } = {
     borderBottom: `1px solid ${colors.mediumGrey}`,
   },
   alternateRowStyle: {
-    background: '#cce5ff',
+    background: colors.lightBlue,
   },
   cardStyle: {
     display: 'flex',

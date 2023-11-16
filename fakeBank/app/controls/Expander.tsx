@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { colors } from '../styles/colors'
 
 interface ExpanderProps {
   title: string
@@ -16,7 +17,12 @@ const Expander: React.FC<ExpanderProps> = ({ title, children }) => {
 
   return (
     <div
-      style={{ border: '1px solid #ccc', marginBottom: '10px', width: '100%' }}
+      style={{
+        border: `1px solid ${colors.mediumGrey}`,
+        marginBottom: '10px',
+        width: '100%',
+        borderRadius: '2px',
+      }}
       className="Expander"
     >
       <div
@@ -25,7 +31,7 @@ const Expander: React.FC<ExpanderProps> = ({ title, children }) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '10px',
-          background: '#f0f0f0',
+          background: colors.lightGrey,
           cursor: 'pointer',
           userSelect: 'none',
         }}

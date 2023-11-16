@@ -1,6 +1,6 @@
 {
   "name": "bank_project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "format": "prettier --write .",
     "dev": "next dev -p 3039",

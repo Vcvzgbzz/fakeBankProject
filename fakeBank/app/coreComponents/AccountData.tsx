@@ -1,6 +1,7 @@
 import React from 'react'
 import { Purchase, BankData } from '../definitions/coreTypings'
 import { pageStyles } from '../styles/styles'
+import { colors } from '../styles/colors'
 
 export type AccountDataProps = {
   data: BankData
@@ -17,7 +18,7 @@ function AccountData({ data }: AccountDataProps) {
   return (
     <div
       style={{
-        border: '1px solid black',
+        border: `1px solid black ${colors.black}`,
         padding: '10px',
         marginBottom: '20px',
         borderRadius: '5px',

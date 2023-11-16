@@ -9,12 +9,13 @@ import { Text } from '../coreComponents/components'
 
 interface ButtonProps {
   className?: string
-  text?: any
+  text?: string
   onClick?: () => void
   disabled?: boolean
   style?: CSSProperties
   icon?: FontAwesomeIconProps['icon']
   title?: string
+  children?: any
 }
 
 function Button({
@@ -25,6 +26,7 @@ function Button({
   style,
   icon,
   title,
+  children,
 }: ButtonProps) {
   const handleMouseEnter = (event) => {
     event.target.style.backgroundColor =
@@ -45,7 +47,8 @@ function Button({
       title={title}
     >
       <HStack spacing={5} align="center">
-        <Text size={13}>{text}</Text>
+        {text && <Text size={13}>{text}</Text>}
+        {children && children}
         {icon && <FontAwesomeIcon icon={icon} />}
       </HStack>
     </button>

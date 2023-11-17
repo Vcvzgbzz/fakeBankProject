@@ -25,11 +25,14 @@ import {
   faChevronUp,
   faUniversity,
   faReceipt,
+  faSitemap,
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import CreditReport from '../coreComponents/CreditReport'
 import { colors } from '../styles/colors'
 import Link from 'next/link'
+import { generateInterestingFacts } from '../coreComponents/CreditReport'
+import JsonViewer from './JsonViewer'
 
 export interface allUserData {
   user: FakeUserResponse['results'][0]
@@ -37,18 +40,22 @@ export interface allUserData {
     savings: BankData
     checking: BankData
   }
+  creditData: {
+    score: number
+    facts: string[]
+  }
 }
 
 export default function HomePage() {
   const [position, setPosition] = useState<number>(0)
+  const [viewJsonData, setViewJsonData] = useState(false)
+  const [fakeUser, setFakeUser] = useState<allUserData | undefined>(undefined)
+
+  const [fakeUserArr, setFakeUserArr] = useState<allUserData[]>([])
 
   useEffect(() => {
     getNextUser()
   }, [])
-
-  const [fakeUser, setFakeUser] = useState<allUserData | undefined>(undefined)
-
-  const [fakeUserArr, setFakeUserArr] = useState<allUserData[]>([])
 
   const getNextUser = () => {
     console.log(position)
@@ -59,17 +66,21 @@ export default function HomePage() {
       callApi<undefined, FakeUserResponse>({
         url: 'https://randomuser.me/api',
         method: 'get',
-        onRequest: () => {
-          console.log('requesting data')
-        },
+        onRequest: () => {},
         onSuccess: (data) => {
-          console.log('data back ')
-          console.log(fakeUserArr)
-          const newUser = {
+          const newCreditScore = Math.min(
+            Math.floor(Math.random() * 800) + 300,
+            800,
+          )
+          const newUser: allUserData = {
             user: data.results[0],
             bankData: {
               checking: bankData('Checking'),
               savings: bankData('Savings'),
+            },
+            creditData: {
+              score: newCreditScore,
+              facts: generateInterestingFacts(data.results[0], newCreditScore),
             },
           }
           fakeUserArr.push(newUser)
@@ -82,6 +93,7 @@ export default function HomePage() {
   }
 
   const getPrevUser = () => {
+    console.log(position)
     if (fakeUserArr[position - 1]) {
       setFakeUser(fakeUserArr[position - 1])
       setPosition(position - 1)
@@ -129,8 +141,6 @@ export default function HomePage() {
     }
   }
 
-  const randomBankDataChecking: BankData = bankData('Checking')
-  const randomBankDataSavings: BankData = bankData('Savings')
   try {
     return !fakeUser ? (
       <div
@@ -145,7 +155,7 @@ export default function HomePage() {
           Loading Your Bank Account Information...
         </Text>
       </div>
-    ) : (
+    ) : !viewJsonData ? (
       <div style={pageStyles.pageContainer}>
         <HStack align="center" style={{ justifyContent: 'space-between' }}>
           <Text size={40}>Fake Bank Incorporated</Text>
@@ -174,6 +184,11 @@ export default function HomePage() {
               text={'Previous User'}
               onClick={getPrevUser}
             />
+            <Button
+              text="View Json Data"
+              onClick={() => setViewJsonData(!viewJsonData)}
+              icon={faSitemap}
+            ></Button>
           </HStack>
           <FontAwesomeIcon icon={faUniversity} size="3x" />
         </HStack>
@@ -181,7 +196,7 @@ export default function HomePage() {
         <hr style={pageStyles.lineStyle}></hr>
         <HStack style={{ justifyContent: 'space-between' }} align="center">
           <UserData user={fakeUser.user}></UserData>
-          <CreditReport user={fakeUser.user}></CreditReport>
+          <CreditReport creditData={fakeUser.creditData}></CreditReport>
         </HStack>
         <hr style={pageStyles.lineStyle}></hr>
 
@@ -205,6 +220,14 @@ export default function HomePage() {
           <p>Email: info@fakebank.com | Phone: (123) 456-7890</p>
           <p>Jadeyn Fincher, Sam Pierce</p>
         </footer>
+      </div>
+    ) : (
+      <div style={pageStyles.pageContainer}>
+        <JsonViewer
+          object={fakeUserArr}
+          viewJsonData={viewJsonData}
+          setViewJsonData={setViewJsonData}
+        />
       </div>
     )
   } catch {

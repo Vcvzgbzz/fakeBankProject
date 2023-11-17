@@ -57,12 +57,12 @@ export default function CreditReport({ user }: CreditReportProps) {
                     index > 0
                       ? colors.darkGrey
                       : fact.includes('Excellent')
-                      ? colors.green
-                      : fact.includes('Good')
-                      ? colors.green
-                      : fact.includes('Some')
-                      ? colors.yellow
-                      : colors.red,
+                        ? colors.green
+                        : fact.includes('Good')
+                          ? colors.green
+                          : fact.includes('Some')
+                            ? colors.yellow
+                            : colors.red,
                 }}
               />
               <Text>{fact}</Text>

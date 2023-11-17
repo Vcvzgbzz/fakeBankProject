@@ -31,25 +31,62 @@ import CreditReport from '../coreComponents/CreditReport'
 import { colors } from '../styles/colors'
 import Link from 'next/link'
 
+export interface allUserData {
+  user: FakeUserResponse['results'][0]
+  bankData: {
+    savings: BankData
+    checking: BankData
+  }
+}
+
 export default function HomePage() {
+  const [position, setPosition] = useState<number>(0)
+
   useEffect(() => {
-    callApi<undefined, FakeUserResponse>({
-      url: 'https://randomuser.me/api',
-      method: 'get',
-      onRequest: () => {
-        console.log('requesting data')
-      },
-      onSuccess: (data) => {
-        console.log('data back ')
-        setFakeUser(data.results[0])
-      },
-      onFail: (error) => console.log(error),
-    })
+    getNextUser()
   }, [])
 
-  const [fakeUser, setFakeUser] = useState<
-    FakeUserResponse['results'][0] | undefined
-  >(undefined)
+  const [fakeUser, setFakeUser] = useState<allUserData | undefined>(undefined)
+
+  const [fakeUserArr, setFakeUserArr] = useState<allUserData[]>([])
+
+  const getNextUser = () => {
+    console.log(position)
+    if (fakeUserArr[position + 1]) {
+      setFakeUser(fakeUserArr[position + 1])
+      setPosition(position + 1)
+    } else {
+      callApi<undefined, FakeUserResponse>({
+        url: 'https://randomuser.me/api',
+        method: 'get',
+        onRequest: () => {
+          console.log('requesting data')
+        },
+        onSuccess: (data) => {
+          console.log('data back ')
+          console.log(fakeUserArr)
+          const newUser = {
+            user: data.results[0],
+            bankData: {
+              checking: bankData('Checking'),
+              savings: bankData('Savings'),
+            },
+          }
+          fakeUserArr.push(newUser)
+          setPosition(position + 1)
+          setFakeUser(newUser)
+        },
+        onFail: (error) => console.log(error),
+      })
+    }
+  }
+
+  const getPrevUser = () => {
+    if (fakeUserArr[position - 1]) {
+      setFakeUser(fakeUserArr[position - 1])
+      setPosition(position - 1)
+    }
+  }
 
   const generateRandomString = (length: number): string => {
     const characters = '0123456789'
@@ -127,27 +164,35 @@ export default function HomePage() {
               title="Have an issue with your statement? Report an issue here"
               onClick={() => {}}
             ></Button>
-            <Button icon={faChevronDown} text={'Another Page'} />
-            <Button icon={faChevronUp} text={'Another Page'} />
+            <Button
+              icon={faChevronDown}
+              text={'Next User'}
+              onClick={getNextUser}
+            />
+            <Button
+              icon={faChevronUp}
+              text={'Previous User'}
+              onClick={getPrevUser}
+            />
           </HStack>
           <FontAwesomeIcon icon={faUniversity} size="3x" />
         </HStack>
 
         <hr style={pageStyles.lineStyle}></hr>
         <HStack style={{ justifyContent: 'space-between' }} align="center">
-          <UserData user={fakeUser}></UserData>
-          <CreditReport user={fakeUser}></CreditReport>
+          <UserData user={fakeUser.user}></UserData>
+          <CreditReport user={fakeUser.user}></CreditReport>
         </HStack>
         <hr style={pageStyles.lineStyle}></hr>
 
         <VStack>
           <Expander
-            children={<AccountData data={randomBankDataChecking} />}
+            children={<AccountData data={fakeUser.bankData.checking} />}
             title="View Your Checking Account Data"
           />
           <hr style={pageStyles.lineStyle}></hr>
           <Expander
-            children={<AccountData data={randomBankDataSavings} />}
+            children={<AccountData data={fakeUser.bankData.savings} />}
             title="View Your Savings Account Data"
           />
         </VStack>

@@ -26,6 +26,7 @@ import {
   faUniversity,
   faReceipt,
   faSitemap,
+  faBlender,
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import CreditReport from '../coreComponents/CreditReport'
@@ -47,18 +48,17 @@ export interface allUserData {
 }
 
 export default function HomePage() {
-  const [position, setPosition] = useState<number>(0)
+  const [position, setPosition] = useState<number>(-1)
   const [viewJsonData, setViewJsonData] = useState(false)
   const [fakeUser, setFakeUser] = useState<allUserData | undefined>(undefined)
 
   const [fakeUserArr, setFakeUserArr] = useState<allUserData[]>([])
-
+  const [newUserIsLoading, setNewUserIsLoading] = useState<boolean>(false)
   useEffect(() => {
     getNextUser()
   }, [])
 
   const getNextUser = () => {
-    console.log(position)
     if (fakeUserArr[position + 1]) {
       setFakeUser(fakeUserArr[position + 1])
       setPosition(position + 1)
@@ -66,40 +66,58 @@ export default function HomePage() {
       callApi<undefined, FakeUserResponse>({
         url: 'https://randomuser.me/api',
         method: 'get',
-        onRequest: () => {},
-        onSuccess: (data) => {
-          const newCreditScore = Math.min(
-            Math.floor(Math.random() * 800) + 300,
-            800,
-          )
-          const newUser: allUserData = {
-            user: data.results[0],
-            bankData: {
-              checking: bankData('Checking'),
-              savings: bankData('Savings'),
-            },
-            creditData: {
-              score: newCreditScore,
-              facts: generateInterestingFacts(data.results[0], newCreditScore),
-            },
-          }
-          fakeUserArr.push(newUser)
-          setPosition(position + 1)
-          setFakeUser(newUser)
+        raceLocker: newUserIsLoading,
+        steps: {
+          onRequest: () => {
+            setNewUserIsLoading(true)
+          },
+          onSuccess: (data) => {
+            const newCreditScore = Math.min(
+              Math.floor(Math.random() * 800) + 300,
+              800,
+            )
+            const newUser: allUserData = {
+              user: data.results[0],
+              bankData: {
+                checking: bankData('Checking'),
+                savings: bankData('Savings'),
+              },
+              creditData: {
+                score: newCreditScore,
+                facts: generateInterestingFacts(
+                  data.results[0],
+                  newCreditScore,
+                ),
+              },
+            }
+            fakeUserArr.push(newUser)
+            setPosition(position + 1)
+            setFakeUser(newUser)
+            setNewUserIsLoading(false)
+          },
+          onFail: (error) => {
+            console.log(error)
+            setNewUserIsLoading(false)
+          },
         },
-        onFail: (error) => console.log(error),
       })
     }
   }
 
   const getPrevUser = () => {
-    console.log(position)
     if (fakeUserArr[position - 1]) {
+      const newPos = position - 1
+      setFakeUser(fakeUserArr[newPos])
+      setPosition(newPos)
+    }
+  }
+  const deleteUser = () => {
+    if (fakeUserArr.length > 1 && position !== 0) {
+      fakeUserArr.splice(position, 1)
       setFakeUser(fakeUserArr[position - 1])
       setPosition(position - 1)
     }
   }
-
   const generateRandomString = (length: number): string => {
     const characters = '0123456789'
     let result = ''
@@ -169,20 +187,21 @@ export default function HomePage() {
             }}
           >
             <Button
-              icon={faReceipt}
-              text={'Report an issue'}
-              title="Have an issue with your statement? Report an issue here"
-              onClick={() => {}}
-            ></Button>
-            <Button
               icon={faChevronDown}
               text={'Next User'}
               onClick={getNextUser}
             />
             <Button
+              disabled={position === 0}
               icon={faChevronUp}
               text={'Previous User'}
               onClick={getPrevUser}
+            />
+            <Button
+              disabled={fakeUserArr.length === 1 || position === 0}
+              icon={faBlender}
+              text={'Delete User'}
+              onClick={deleteUser}
             />
             <Button
               text="View Json Data"
@@ -219,6 +238,28 @@ export default function HomePage() {
           <p>123 Main Street, Cityville, Country</p>
           <p>Email: info@fakebank.com | Phone: (123) 456-7890</p>
           <p>Jadeyn Fincher, Sam Pierce</p>
+          <hr style={pageStyles.lineStyle}></hr>
+          <br></br>
+          <Expander title="Credits for page">
+            <VStack>
+              <Text>
+                <a
+                  href="https://github.com/Vcvzgbzz/fakeBankProject/commits/main"
+                  target="new"
+                >
+                  View Github Commits
+                </a>
+              </Text>
+              <Text>
+                <a
+                  href="https://github.com/Vcvzgbzz/fakeBankProject/graphs/contributors"
+                  target="new"
+                >
+                  View Github Contributions
+                </a>
+              </Text>
+            </VStack>
+          </Expander>
         </footer>
       </div>
     ) : (

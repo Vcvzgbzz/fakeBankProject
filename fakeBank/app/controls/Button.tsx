@@ -34,14 +34,20 @@ function Button({
   }
 
   const handleMouseLeave = (event) => {
-    event.target.style.backgroundColor = controlStyles.button.backgroundColor
+    !disabled
+      ? (event.target.style.backgroundColor =
+          controlStyles.button.backgroundColor)
+      : null
   }
+  const parsedStyle = disabled
+    ? { ...style, ...controlStyles.button, ...controlStyles.disabledButton }
+    : { ...style, ...controlStyles.button }
   return (
     <button
       className={className}
       onClick={onClick}
       disabled={disabled}
-      style={{ ...style, ...controlStyles.button }}
+      style={parsedStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       title={title}

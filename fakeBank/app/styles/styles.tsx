@@ -88,7 +88,7 @@ export const controlStyles: { [key: string]: CSSProperties } = {
   button: {
     backgroundColor: colors.darkGrey,
     color: colors.white,
-    padding: '10px 15px',
+    padding: '8px 13px',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
@@ -96,5 +96,11 @@ export const controlStyles: { [key: string]: CSSProperties } = {
   },
   hoverButton: {
     backgroundColor: colors.mediumGrey,
+  },
+  disabledButton: {
+    backgroundColor: colors.lightGrey,
+    color: colors.mediumGrey,
+    cursor: 'not-allowed',
+    transition: 'none',
   },
 }

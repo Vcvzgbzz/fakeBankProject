@@ -40,7 +40,7 @@ export default function CreditReport({ creditData }: CreditReportProps) {
   return (
     <div style={pageStyles.cardStyle}>
       <VStack>
-        <HStack>
+        <HStack align="center">
           <FontAwesomeIcon
             icon={faCreditCard}
             style={{ marginRight: '10px' }}

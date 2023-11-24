@@ -1,24 +1,28 @@
-import { useRouter } from 'next/router'
-
 interface CallApiProps<RequestType, ResponseType> {
-  onSuccess?: (data: ResponseType) => void
-  onFail?: (error: any) => void
-  onRequest?: () => void
+  steps?: {
+    onSuccess?: (data: ResponseType) => void
+    onFail?: (error: any) => void
+    onRequest?: () => void
+  }
+
   url: string
   requestPayload?: RequestType
   method?: 'get' | 'post'
+  raceLocker?: boolean
 }
 
 export function callApi<RequestType, ResponseType>({
-  onSuccess,
-  onFail,
-  onRequest,
+  steps,
   url,
   requestPayload,
   method,
+  raceLocker,
 }: CallApiProps<RequestType, ResponseType>) {
-  if (onRequest) {
-    onRequest()
+  if (raceLocker) {
+    return
+  }
+  if (steps.onRequest) {
+    steps.onRequest()
   }
   fetch(url, {
     method: method ? method : 'POST',
@@ -29,13 +33,13 @@ export function callApi<RequestType, ResponseType>({
   })
     .then((res) => res.json())
     .then((data: ResponseType) => {
-      if (onSuccess) {
-        onSuccess(data)
+      if (steps.onSuccess) {
+        steps.onSuccess(data)
       }
     })
     .catch((error) => {
-      if (onFail) {
-        onFail(error)
+      if (steps.onFail) {
+        steps.onFail(error)
       }
     })
 }

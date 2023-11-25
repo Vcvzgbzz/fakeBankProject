@@ -12,11 +12,11 @@ This README.md outlines the features developed by Group 1 for the Fake Bank Proj
 
 - **Hosted Site**
   - [Link to Hosted Site for Jadeyn](http://csci331.cs.montana.edu:3039/)
-  - [Link to Hosted Site for Sam](Sam)
+  - [Link to Hosted Site for Sam](http://csci331.cs.montana.edu:3072/)
 
 - **GitHub Repositories**
   - [Link to GitHub Repo for Jadeyn](https://github.com/Vcvzgbzz/fakeBankProject/tree/main)
-  - [Link to GitHub Repo for Sam](Sam)
+  - [Link to GitHub Repo for Sam](https://github.com/SamPierce00/web-dev-group-project)
 
 ## Creative Objective
 

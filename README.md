@@ -6,7 +6,7 @@
 
 ## Short Description
 
-This README.md outlines the features developed by Group 1 for the Fake Bank Project. The document includes a brief overview of the features, links to the hosted site, GitHub repositories, group presentation slideshow, creative objectives, technical summary, individual member contributions, conclusions, and references.
+This README.md outlines the features developed by Group 1 for the Fake Bank Project, with a specific focus on TypeScript. TypeScript, a superset of JavaScript, brings optional typing to the language, enhancing code clarity and development efficiency.
 
 ## Links
 
@@ -24,7 +24,7 @@ In this project, we aimed to demonstrate the considerable improvements that opti
 
 ## Tech Summary
 
-Some of the tools used included: prettier (formats the files), fortawesome (icons), Typescript, Fake User Api, and React.
+Some of the tools used included: prettier (formats the files), fortawesome (icons), Typescript, Fake User Api, and React. It is the same stack that we used for our Next.js assignment, although this time instead of using javascript components we used typescript components.
 
 ## Individual Member Contributions
 

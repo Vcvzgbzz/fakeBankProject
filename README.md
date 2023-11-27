@@ -38,7 +38,7 @@ Created functionality for get previous user and get next user buttons to allow t
 
 ## Conclusion
 
-The group learned how the addition of typing would be useful to enhance normal JavaScript and enable the use of IntelliSense. This was especially useful when it came to the callApi function, as adding generics to type the function allowed us to understand the expected data type of the response. Nothing went awry in this demo, as the functionality was intuitive. If I were to make changes to the project for the future, I would focus on improving page routing, as our current page routing for components like the JsonViewer isn't a genuinely effective method for real page navigation.
+The group learned how the addition of typing would be useful to enhance normal JavaScript and enable the use of IntelliSense. This was especially useful when it came to the callApi function, as adding generics to type the function allowed us to understand the expected data type of the response. Nothing went awry in this demo, as the functionality was intuitive. If we were to make changes to the project for the future, we would focus on improving page routing, as our current page routing for components like the JsonViewer isn't a genuinely effective method for real page navigation.
 
 
 

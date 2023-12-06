@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../controls/Button'
 import Input from '../controls/Input'
-import { callApi, routeToPage } from '../coreFunctions/functions'
+import callApi from '../coreFunctions/callApi'
 import {
   FakeStoreApiResponse,
   FakeStoreItem,
